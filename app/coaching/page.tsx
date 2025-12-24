@@ -90,7 +90,7 @@ export default function CoachingPage() {
             <iframe 
               src={iframeSrc}
               className="w-full border-0"
-              style={{ height: "65vh", minHeight: "450px" }}
+              style={{ height: "65vh", minHeight: "450px"}}
               allow="microphone; camera"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
             />

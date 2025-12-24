@@ -48,7 +48,7 @@ export interface UserInfo {
 
 // Helper to build iframe src with user params
 export function getIframeSrc(perspectiveId: string, user?: UserInfo | null): string {
-  const params = new URLSearchParams({ mode: "restart" })
+  const params = new URLSearchParams({ mode: "restart", hideProgress: "true" })
   
   if (user) {
     params.set("name", user.name)
@@ -61,11 +61,12 @@ export function getIframeSrc(perspectiveId: string, user?: UserInfo | null): str
 // Helper to get data attribute value with user params (for JS embeds)
 export function getEmbedId(perspectiveId: string, user?: UserInfo | null): string {
   if (!user) {
-    return `${perspectiveId}?mode=restart`
+    return `${perspectiveId}?mode=restart&hideProgress=true`
   }
   
   const params = new URLSearchParams({
     mode: "restart",
+    hideProgress: "true",
     name: user.name,
     email: user.email,
   })

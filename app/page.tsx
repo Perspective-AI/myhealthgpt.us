@@ -2,12 +2,15 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { HeartPulseIcon, BrainIcon, ScaleIcon, SparklesIcon, ArrowRightIcon, ShieldCheckIcon, MessageCircleIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { UserInfoDialog } from "@/components/user-info-dialog"
+import { UserAvatar } from "@/components/user-avatar"
+import { useUser } from "@/lib/user-context"
 
 const features = [
   {
@@ -35,8 +38,16 @@ const features = [
 export default function LandingPage() {
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [destinationPath, setDestinationPath] = React.useState("/onboarding")
+  const { user, isLoading } = useUser()
+  const router = useRouter()
 
   const handleCTAClick = (path: string) => {
+    // If user exists, navigate directly
+    if (user) {
+      router.push(path)
+      return
+    }
+    // Otherwise show the dialog
     setDestinationPath(path)
     setDialogOpen(true)
   }
@@ -57,7 +68,10 @@ export default function LandingPage() {
             <HeartPulseIcon className="size-6 text-primary" />
             <span className="font-semibold text-lg">MyHealthGPT</span>
           </Link>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <UserAvatar />
+          </div>
         </div>
       </header>
 

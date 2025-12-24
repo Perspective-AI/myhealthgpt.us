@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { HeartPulseIcon, LayoutDashboardIcon, MessageCircleIcon, BookOpenIcon, SparklesIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { UserAvatar } from "@/components/user-avatar"
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboardIcon },
@@ -24,7 +25,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 max-w-screen-xl items-center justify-between px-4 mx-auto">
+      <div className="container flex h-16 max-w-7xl items-center justify-between px-4 mx-auto">
         <Link href="/" className="flex items-center gap-2">
           <HeartPulseIcon className="size-6 text-primary" />
           <span className="font-semibold text-lg">MyHealthGPT</span>
@@ -49,6 +50,7 @@ export function Navigation() {
             )
           })}
           <ThemeToggle />
+          <UserAvatar />
         </nav>
       </div>
     </header>
