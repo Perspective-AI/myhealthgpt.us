@@ -1,11 +1,17 @@
+"use client"
+
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { HeartPulseIcon, ArrowLeftIcon, SparklesIcon } from "lucide-react"
-import { PERSPECTIVE_CONFIG } from "@/lib/perspective"
+import { PERSPECTIVE_CONFIG, getIframeSrc } from "@/lib/perspective"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useUser } from "@/lib/user-context"
 
 export default function OnboardingPage() {
+  const { user } = useUser()
+  const iframeSrc = getIframeSrc(PERSPECTIVE_CONFIG.onboarding.id, user)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
       {/* Simple Header */}
@@ -35,7 +41,7 @@ export default function OnboardingPage() {
               <span>Personalized Onboarding</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-              Let&apos;s Get to Know You
+              Let&apos;s Get to Know You{user?.name ? `, ${user.name}` : ""}
             </h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Have a conversation with our AI to help us understand your work situation, 
@@ -46,7 +52,7 @@ export default function OnboardingPage() {
           {/* Perspective Fullpage Embed */}
           <div className="bg-card rounded-2xl shadow-lg border overflow-hidden">
             <iframe 
-              src={PERSPECTIVE_CONFIG.onboarding.iframeSrc}
+              src={iframeSrc}
               className="w-full border-0"
               style={{ height: "70vh", minHeight: "500px" }}
               allow="microphone; camera"
@@ -64,4 +70,3 @@ export default function OnboardingPage() {
     </div>
   )
 }
-

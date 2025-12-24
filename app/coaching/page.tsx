@@ -12,7 +12,8 @@ import {
   ArrowLeftIcon,
   ClockIcon
 } from "lucide-react"
-import { PERSPECTIVE_CONFIG } from "@/lib/perspective"
+import { PERSPECTIVE_CONFIG, getIframeSrc } from "@/lib/perspective"
+import { useUser } from "@/lib/user-context"
 
 const coachingTopics = [
   {
@@ -51,6 +52,8 @@ const coachingTopics = [
 
 export default function CoachingPage() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
+  const { user } = useUser()
+  const iframeSrc = getIframeSrc(PERSPECTIVE_CONFIG.coaching.id, user)
 
   const activeTopic = coachingTopics.find(t => t.id === selectedTopic)
 
@@ -85,7 +88,7 @@ export default function CoachingPage() {
           {/* Perspective Fullpage Embed */}
           <div className="max-w-3xl mx-auto bg-card rounded-2xl shadow-lg border overflow-hidden">
             <iframe 
-              src={PERSPECTIVE_CONFIG.coaching.iframeSrc}
+              src={iframeSrc}
               className="w-full border-0"
               style={{ height: "65vh", minHeight: "450px" }}
               allow="microphone; camera"
@@ -162,4 +165,3 @@ export default function CoachingPage() {
     </div>
   )
 }
-
