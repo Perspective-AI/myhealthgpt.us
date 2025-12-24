@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyHealthGPT
+
+**[Live Demo →](https://myhealthgpt.us)**
+
+A demo workplace wellness app showcasing how [Perspective AI](https://getperspective.ai) conversational agents can be embedded throughout an application.
+
+A Next.js app with Shadcn UI, built using the [Perspective AI MCP](https://github.com/ArtisanLabs/perspectiveapi-mcp).
+
+## The Demo App
+
+The app demonstrates a complete wellness journey with AI conversations at each touchpoint:
+
+- **Homepage** — Captures user name and email to personalize conversations
+- **Onboarding** — Fullpage AI conversation to understand the user's work situation and wellness goals
+- **Dashboard** — Wellness stats overview with a chat widget for quick questions
+- **Daily Check-in** — Mood, energy, and stress tracker followed by a popup AI conversation
+- **Coaching** — Topic selection (stress, burnout, balance, wellbeing) leading to fullpage coaching sessions
+- **Resources** — Wellness library with a slider AI assistant for personalized recommendations
+
+## Perspective Embed Types Demonstrated
+
+| Embed Type | Use Case | Page |
+|------------|----------|------|
+| Fullpage | Immersive conversations | Onboarding, Coaching |
+| Popup | Triggered after user action | Check-in |
+| Slider | Contextual assistance | Resources |
+| Chat Widget | Persistent quick access | Dashboard |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Run the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For local Perspective development, create a `.env.local` file:
 
-## Learn More
+```
+NEXT_PUBLIC_PERSPECTIVE_URL=http://localhost:3020
+```
 
-To learn more about Next.js, take a look at the following resources:
+If not set, defaults to production (`https://getperspective.ai`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Setup Your Own
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This demo uses pre-configured Perspective agents. To use your own:
 
-## Deploy on Vercel
+1. Create a [Perspective AI](https://getperspective.ai) account
+2. Install the [Perspective AI MCP](https://getperspective.ai/docs/mcp)
+3. Use Cursor or Claude Code with the Perspective MCP to generate perspectives for each use case and update the IDs in `lib/perspective.ts`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Perspective AI](https://getperspective.ai)
+- [Perspective AI MCP](https://getperspective.ai/docs/mcp)
+- [Perspective AI Documentation](https://getperspective.ai/docs)
