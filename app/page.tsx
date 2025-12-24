@@ -1,9 +1,13 @@
+"use client"
+
+import * as React from "react"
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { HeartPulseIcon, BrainIcon, ScaleIcon, SparklesIcon, ArrowRightIcon, ShieldCheckIcon, MessageCircleIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { UserInfoDialog } from "@/components/user-info-dialog"
 
 const features = [
   {
@@ -29,8 +33,23 @@ const features = [
 ]
 
 export default function LandingPage() {
+  const [dialogOpen, setDialogOpen] = React.useState(false)
+  const [destinationPath, setDestinationPath] = React.useState("/onboarding")
+
+  const handleCTAClick = (path: string) => {
+    setDestinationPath(path)
+    setDialogOpen(true)
+  }
+
   return (
     <div className="min-h-screen">
+      {/* User Info Dialog */}
+      <UserInfoDialog 
+        open={dialogOpen} 
+        onOpenChange={setDialogOpen} 
+        destinationPath={destinationPath}
+      />
+
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-50">
         <div className="container max-w-screen-xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -63,14 +82,20 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
-              <Link href="/onboarding" className={cn(buttonVariants({ size: "lg" }), "gap-2 text-base")}>
+              <button 
+                onClick={() => handleCTAClick("/onboarding")}
+                className={cn(buttonVariants({ size: "lg" }), "gap-2 text-base")}
+              >
                 Start Your Journey
                 <ArrowRightIcon className="size-4" />
-              </Link>
-              <Link href="/dashboard" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "gap-2 text-base")}>
+              </button>
+              <button 
+                onClick={() => handleCTAClick("/dashboard")}
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "gap-2 text-base")}
+              >
                 <SparklesIcon className="size-4" />
                 Explore Dashboard
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -141,10 +166,13 @@ export default function LandingPage() {
           <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
             Join thousands of employees who are taking control of their workplace wellness.
           </p>
-          <Link href="/onboarding" className={cn(buttonVariants({ size: "lg" }), "gap-2 text-base")}>
+          <button 
+            onClick={() => handleCTAClick("/onboarding")}
+            className={cn(buttonVariants({ size: "lg" }), "gap-2 text-base")}
+          >
             Get Started Free
             <ArrowRightIcon className="size-4" />
-          </Link>
+          </button>
         </div>
       </section>
 

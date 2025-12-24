@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
+import { UserProvider } from "@/lib/user-context";
 import { PERSPECTIVE_CONFIG } from "@/lib/perspective";
 
 const outfit = Outfit({subsets:['latin'],variable:'--font-sans'});
@@ -37,8 +38,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navigation />
-          {children}
+          <UserProvider>
+            <Navigation />
+            {children}
+          </UserProvider>
         </ThemeProvider>
         <Script src={PERSPECTIVE_CONFIG.scriptUrl} strategy="lazyOnload" />
       </body>
